@@ -1,5 +1,7 @@
 package galerie.entity;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -14,7 +16,7 @@ public class Exposition {
     private Integer id;
     
     @Column(unique=true)
-    private Date debut;
+    private LocalDate debut;
     
     @Column(unique=true)
     private String intitule;
@@ -23,10 +25,15 @@ public class Exposition {
     private int duree;
     
     @OneToMany(mappedBy = "exposition")
-    private List<Transaction> transactions;
+    private List<Transaction> transactions = new LinkedList<>();
     
     @ManyToMany
-    private List<Tableau> tableaux;
+    @JoinTable(name="expo_tableau",joinColumns = 
+                @JoinColumn(name = "exposition_id", referencedColumnName="id"),
+        inverseJoinColumns = 
+                @JoinColumn(name = "tableau_id",  referencedColumnName="id")
+    )  
+    private List<Tableau> tableaux = new LinkedList<>();
     
     @ManyToOne
     private Galerie galerie;

@@ -1,5 +1,7 @@
 package galerie.entity;
+import java.time.LocalDate;
 import java.util.Date;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -21,13 +23,13 @@ public class Galerie {
     private String adresse;
     
     @OneToMany(mappedBy = "galerie")
-    private List<Exposition> expositions;
+    private List<Exposition> expositions = new LinkedList<>();
     
     public float CAannuel(int annee){
         float res = 0;
         for (Exposition e : expositions){
-            Date d = e.getDebut();
-            if (d.after(new Date(annee, 1, 1)) && d.before(new Date(annee, 12, 31))){
+            LocalDate d = e.getDebut();
+            if (d.isAfter(LocalDate.of(annee, 1, 1)) && d.isBefore(LocalDate.of(annee, 12, 31))){
                 res+=e.CA();
             }
         }

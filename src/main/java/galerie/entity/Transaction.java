@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.time.LocalDate;
 import java.util.Date;
 import javax.persistence.*;
 import lombok.*;
@@ -13,7 +14,7 @@ public class Transaction {
     private Integer id;
     
     @Column(unique=true)
-    private Date venduLe;
+    private LocalDate venduLe;
     
     @Column(unique=true)
     private float prixVente;

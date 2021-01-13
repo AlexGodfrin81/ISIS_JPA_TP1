@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -25,9 +26,9 @@ public class Tableau {
     private int hauteur;
     
     @ManyToMany
-    private List<Exposition> expositions;
+    private List<Exposition> expositions = new LinkedList<>();
     
-    @OneToOne(optional=true)
+    @OneToOne(mappedBy = "oeuvre")
     private Transaction transaction;
     
     @ManyToOne(optional=true)

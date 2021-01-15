@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 import lombok.*;
@@ -8,7 +9,7 @@ import lombok.*;
  */
 @Getter @Setter @RequiredArgsConstructor @ToString
 @Entity
-public class Artiste extends Personne{
+public class Artiste extends Personne implements Serializable{
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     

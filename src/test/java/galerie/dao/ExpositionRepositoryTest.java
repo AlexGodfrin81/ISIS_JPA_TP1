@@ -23,12 +23,20 @@ public class ExpositionRepositoryTest {
     private ExpositionRepository expoDao;
     
     @Test
-    @Sql("test-data.sql") // On peut charger des donnnées spécifiques pour un test
+    @Sql("data.sql") // On peut charger des donnnées spécifiques pour un test
     public void onSaitCompterLesEnregistrements() {
         log.info("On compte les enregistrements de la table 'Exposition'");
-        int combienDansLeJeuDeTest = 1; 
+        int combienDansLeJeuDeTest = 1;
         long nombre = expoDao.count();
         assertEquals(combienDansLeJeuDeTest, nombre, "On doit trouver 1 exposition" );
     }
     
+    @Test
+    @Sql("data.sql")
+    public void CA(){
+        log.info("On utilise la méthode CA");
+        float res = 1250.50f;
+        float prix = expoDao.CA(1);
+        assertEquals(res, prix, "les 2 données doivent être égal");
+    }
 }

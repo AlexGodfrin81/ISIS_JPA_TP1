@@ -23,7 +23,7 @@ public class PersonneRepositoryTest {
     private PersonneRepository persDao;
     
     @Test
-    @Sql("test-data.sql") // On peut charger des donnnées spécifiques pour un test
+    @Sql("data.sql") // On peut charger des donnnées spécifiques pour un test
     public void onSaitCompterLesEnregistrements() {
         log.info("On compte les enregistrements de la table 'Personne'");
         int combienDansLeJeuDeTest = 1; 

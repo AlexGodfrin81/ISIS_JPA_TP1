@@ -20,7 +20,7 @@ public class GalerieRepositoryTest {
     private GalerieRepository galerieDAO;
 
     @Test
-    @Sql("test-data.sql") // On peut charger des donnnées spécifiques pour un test
+    @Sql("data.sql") // On peut charger des donnnées spécifiques pour un test
     public void onSaitCompterLesEnregistrements() {
         log.info("On compte les enregistrements de la table 'Galerie'");
         int combienDansLeJeuDeTest = 1; 

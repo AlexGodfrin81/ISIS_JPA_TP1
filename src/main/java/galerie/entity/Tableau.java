@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.io.Serializable;
 import java.util.LinkedList;
 import java.util.List;
 import javax.persistence.*;
@@ -9,7 +10,7 @@ import lombok.*;
  */
 @Getter @Setter @RequiredArgsConstructor @ToString
 @Entity
-public class Tableau {
+public class Tableau implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     
@@ -28,9 +29,10 @@ public class Tableau {
     @ManyToMany
     private List<Exposition> expositions = new LinkedList<>();
     
-    @OneToOne(mappedBy = "oeuvre")
-    private Transaction transaction;
+    @OneToOne(mappedBy="tableau")
+    private Achat transaction;
     
     @ManyToOne(optional=true)
+    @JoinColumn(name="artiste_id")
     private Artiste artiste;
 }

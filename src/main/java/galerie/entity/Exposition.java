@@ -1,4 +1,5 @@
 package galerie.entity;
+import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.Date;
 import java.util.LinkedList;
@@ -11,7 +12,7 @@ import lombok.*;
  */
 @Getter @Setter @RequiredArgsConstructor @ToString
 @Entity
-public class Exposition {
+public class Exposition implements Serializable {
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY) 
     private Integer id;
     
@@ -24,25 +25,13 @@ public class Exposition {
     @Column(unique=true)
     private int duree;
     
-    @OneToMany(mappedBy = "exposition")
-    private List<Transaction> transactions = new LinkedList<>();
+    @OneToMany
+    private List<Achat> transactions;
     
-    @ManyToMany
-    @JoinTable(name="expo_tableau",joinColumns = 
-                @JoinColumn(name = "exposition_id", referencedColumnName="id"),
-        inverseJoinColumns = 
-                @JoinColumn(name = "tableau_id",  referencedColumnName="id")
-    )  
+    @ManyToMany(mappedBy="expositions")
     private List<Tableau> tableaux = new LinkedList<>();
     
     @ManyToOne
+    @JoinColumn(name="galerie_id")
     private Galerie galerie;
-    
-    public float CA(){
-        float res = 0f;
-        for (Transaction t : transactions){
-            res+=t.getPrixVente();
-        }
-        return res;
-    }
 }
